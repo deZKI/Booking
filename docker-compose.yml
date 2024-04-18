@@ -1,0 +1,85 @@
+version: '3.3'
+
+services:
+  core:
+    build: core
+    volumes:
+      - static_volume:/app/static/
+      - media_volume:/app/media/
+    entrypoint: ["sh", "entrypoint.sh"]
+    ports:
+      - "8000"
+    env_file:
+      - .env
+    depends_on:
+      - postgres_db
+      - redis
+      - rabbitmq
+    environment:
+      - POSTGRES_HOST=postgres_db
+      - REDIS_HOST=redis
+      - RABBITMQ_HOST=rabbitmq
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "4200"
+
+  telegram_bot:
+    build: telegram_bot
+    env_file:
+      - .env
+    depends_on:
+      - core
+
+  postgres_db:
+    image: postgres:16
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  nginx:
+    build: ./nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - static_volume:/app/static
+      - media_volume:/app/media
+    depends_on:
+      - core
+
+  celery:
+    build: core
+    depends_on:
+      - core
+      - rabbitmq
+    command: celery -A config worker --concurrency=4 --loglevel=info  -P gevent
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_HOST=postgres_db
+      - REDIS_HOST=redis
+      - RABBITMQ_HOST=rabbitmq
+    restart: always
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379"
+    restart: always
+
+  rabbitmq:
+     image: rabbitmq:3-management-alpine
+     ports:
+       - "5672"
+     restart: always
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:

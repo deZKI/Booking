@@ -1,0 +1,5 @@
+.idea
+.env
+core/.idea
+nginx/certs
+__pycache__
