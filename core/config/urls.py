@@ -11,20 +11,17 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
 )
 
-from books.views import BooksViewSet, TagsViewSet
-
 schema_view = get_schema_view(
     openapi.Info(
         title="PixelLibrary Swagger",
         default_version='v1',
-        description="Документация к api PixelLibrary",
+        description="Документация к api Booking",
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
 router = routers.DefaultRouter()
-router.register(r'books', BooksViewSet, basename='books')
-router.register(r'tags', TagsViewSet, basename='tags')
+
 urlpatterns = [
     path('api/', include(router.urls)),
 

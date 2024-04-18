@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "PixelLibrary"
+name = "Booking"
 version = "0.1.0"
 description = ""
 authors = ["kiril <kirill.301522@gmail.com>"]

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "PixelLibrary telegram-bot"
+name = "Booking telegram-bot"
 version = "0.1.0"
 description = "telegram-bot for app"
 authors = ["kiril <kirill.301522@gmail.com>"]
