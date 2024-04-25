@@ -15,10 +15,10 @@ REDIS_HOST = os.getenv('REDIS_HOST')
 REDIS_PORT = os.getenv('REDIS_PORT')
 AMPQ = os.getenv('AMPQ')
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ['http://localhost:4200']
-CORS_ALLOWED_ORIGINS = ['http://localhost:4200']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000']
 
-DEBUG = False
+DEBUG = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -28,12 +28,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'admin_reorder',  # Переопределение списка админки
     'rest_framework',
     'drf_yasg',
     'corsheaders',
+    'image_uploader_widget',
 
     'users',
+    'hotels'
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -48,23 +49,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    'admin_reorder.middleware.ModelAdminReorder',
 ]
 
 ROOT_URLCONF = 'config.urls'
-
-ADMIN_REORDER = (
-    'sites',
-
-    {
-        'app': 'users', 'label': 'Users',
-        'models': (
-            'users.Users',
-
-        ),
-    },
-)
 
 TEMPLATES = [
     {
@@ -115,7 +102,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-En'
+LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'UTC'
 
@@ -131,13 +118,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-sentry_sdk.init(
-    dsn=SENTRY_DSN,
-    traces_sample_rate=1.0,
-    profiles_sample_rate=1.0,
-)
-
-AUTH_USER_MODEL = 'users.Users'
+AUTH_USER_MODEL = 'users.User'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'

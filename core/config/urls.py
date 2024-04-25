@@ -11,9 +11,12 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
 )
 
+from hotels.views import HotelViewSet, RoomViewSet, BookingViewSet
+from users.views import UserRegistrationAPIView
+
 schema_view = get_schema_view(
     openapi.Info(
-        title="PixelLibrary Swagger",
+        title="Booking Swagger",
         default_version='v1',
         description="Документация к api Booking",
     ),
@@ -21,6 +24,9 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 router = routers.DefaultRouter()
+router.register(r'hotels', HotelViewSet)
+router.register(r'rooms', RoomViewSet)
+router.register(r'bookings', BookingViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
@@ -34,9 +40,11 @@ urlpatterns = [
     path('api/auth/login/', TokenObtainPairView.as_view(), name='login'),
     path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/auth/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('api/auth/register/', UserRegistrationAPIView.as_view(), name='user-registration'),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += path('__debug__/', include("debug_toolbar.urls")),
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += path('__debug__/', include("debug_toolbar.urls")),

@@ -1,24 +1,8 @@
 from django.contrib import admin
-from django.contrib.auth.models import Group
 
-from users.models import AuthComment, BookComment, Users
-
-admin.site.unregister(Group)
+from users.models import User
 
 
-@admin.register(Users)
-class UsersAdmin(admin.ModelAdmin):
-    """ Custom User Admin """
-    pass
-
-
-@admin.register(BookComment)
-class BookCommentAdmin(admin.ModelAdmin):
-    """ BookComment """
-    pass
-
-
-@admin.register(AuthComment)
-class AuthCommentAdmin(admin.ModelAdmin):
-    """ AuthComment """
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
     pass

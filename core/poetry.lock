@@ -327,17 +327,24 @@ files = [
 Django = ">=2.2"
 
 [[package]]
-name = "django-modeladmin-reorder"
-version = "0.3.1"
-description = "Custom ordering for the apps and models in the admin app."
+name = "django-image-uploader-widget"
+version = "0.5.0"
+description = "Simple Image Uploader Widget for Django-Admin"
 optional = false
-python-versions = "*"
+python-versions = ">=3.8"
 files = [
-    {file = "django-modeladmin-reorder-0.3.1.tar.gz", hash = "sha256:bf42d0dcd184b796b4d6d988c4b4cea7914adfc4430dd9978a8a0199051f189f"},
+    {file = "django-image-uploader-widget-0.5.0.tar.gz", hash = "sha256:9def1ea259eadce5a5a02d795ff27063f6922402b39c5cf5a756401c11e05afc"},
+    {file = "django_image_uploader_widget-0.5.0-py3-none-any.whl", hash = "sha256:f3aa0e2f2cae3aedee02157f7c9b919b9b66c3f60e4d7fcb695c0fe6be46f174"},
 ]
 
 [package.dependencies]
-django = "*"
+django = ">=3.2"
+Pillow = "*"
+
+[package.extras]
+dev = ["black", "isort", "pre-commit"]
+docs = ["mkdocs", "mkdocs-awesome-pages-plugin", "mkdocs-glightbox", "mkdocs-material"]
+test = ["playwright", "tiny-match-snapshot"]
 
 [[package]]
 name = "django-redis"
@@ -1490,4 +1497,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "6fa715de6f011d8a2415bb89414c34541a2eeded93a6f7abb974899c5d73c644"
+content-hash = "15f460d150249432f9ea2442c91f1acf9cc78da4c37ea629d33e61bb2fc04b01"
