@@ -1,0 +1,10 @@
+<div class="hotel">
+  <img [src]="hotel.imageUrl" alt="Hotel Image">
+  <h3>{{ hotel.name }}</h3>
+  <p>{{ hotel.location }}</p>
+  <div class="price">от {{ hotel.price }} P/ночь</div>
+  <div class="stars">
+    <mat-icon *ngFor="let i of [].constructor(hotel.stars)">star</mat-icon>
+  </div>
+  <button mat-raised-button color="primary">Подробнее</button>
+</div>

@@ -9,6 +9,7 @@ class Hotel(models.Model):
     name = models.CharField(max_length=200, verbose_name="Название")
     location = models.CharField(max_length=300, verbose_name="Местоположение")
     description = models.TextField(verbose_name="Описание")
+    image = models.ImageField(verbose_name="Превью отеля", blank=True)
 
     class Meta:
         verbose_name = 'Отель'
