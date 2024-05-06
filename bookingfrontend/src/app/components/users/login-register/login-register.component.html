@@ -1,0 +1,27 @@
+<form class="login-register-form" (ngSubmit)="onSubmit()">
+  <div class="login-container">
+    <div class="left-panel">
+      <h2>{{ isLoginMode ? 'Вход в личный кабинет' : 'Регистрация' }}</h2>
+      <div class="arrow-icon">
+        <mat-icon svgIcon="enter-outline" *ngIf="isLoginMode"></mat-icon>
+        <mat-icon svgIcon="avatar" *ngIf="!isLoginMode"></mat-icon>
+      </div>
+    </div>
+    <div class="right-panel">
+      <div class="form-group">
+        <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="e-mail" required>
+      </div>
+
+      <div class="form-group">
+        <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="пароль" required>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+      <div class="button-group">
+        <button type="submit">{{ isLoginMode ? 'Войти' : 'Зарегистрироваться' }}</button>
+        <button type="button" (click)="toggleMode()">{{ isLoginMode ? 'Регистрация' : 'Вход' }}</button>
+      </div>
+    </div>
+  </div>
+</form>

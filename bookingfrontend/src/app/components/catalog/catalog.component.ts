@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Hotel} from "../models/hotels";
-import {HotelsService} from "../services/hotels.service";
+import {Hotel} from "../../shared/models/hotels";
+import {HotelsService} from "../../services/hotels.service";
 import {take, tap} from "rxjs";
 
 @Component({

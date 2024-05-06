@@ -1,7 +1,7 @@
 export interface Hotel {
+  price: number;
   name: string;
   location: string;
-  price: number;
+  rating: number;
   image: string;
-  stars: number;
 }

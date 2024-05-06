@@ -6,6 +6,11 @@ from .models import Hotel, Room, Booking
 
 
 class HotelSerializer(serializers.ModelSerializer):
+    price = serializers.SerializerMethodField()
+
+    def get_price(self, hotel: Hotel):
+        return hotel.price
+
     class Meta:
         model = Hotel
         fields = '__all__'
@@ -24,7 +29,7 @@ class BookingCreationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Booking
-        fields = ('room', 'check_in', 'check_out', 'guests', 'user', )
+        fields = ('room', 'check_in', 'check_out', 'guests', 'user',)
 
     def create(self, validated_data):
         """Переопределяем метод создания для обработки исключений."""

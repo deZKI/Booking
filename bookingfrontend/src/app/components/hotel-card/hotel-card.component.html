@@ -1,0 +1,18 @@
+<div class="hotel-card">
+  <img [src]="hotel.image" alt="{{ hotel.name }}">
+  <div class="hotel-info">
+    <div class="d-flex flex-row justify-content-between">
+      <div class="hotel-price">от {{ hotel.price }} ₽/ ночь</div>
+      <div class="hotel-rating">
+        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+          <span [class.filled]="i < hotel.rating">★</span>
+        </ng-container>
+      </div>
+    </div>
+    <div class="hotel-name">{{ hotel.name }}</div>
+    <div class="hotel-location">{{ hotel.location }}</div>
+    <button class="button" mat-button>
+      <span>Подробнее</span>
+    </button>
+  </div>
+</div>

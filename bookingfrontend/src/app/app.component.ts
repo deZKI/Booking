@@ -24,6 +24,12 @@ export class AppComponent {
     ).addSvgIcon(
       'arrow',
       this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/icons/arrow.svg")
+    ).addSvgIcon(
+      'avatar',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/icons/avatar.svg")
+    ).addSvgIcon(
+      'enter-outline',
+      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/icons/enter-outline.svg")
     )
   }
 }

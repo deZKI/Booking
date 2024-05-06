@@ -1,0 +1,15 @@
+.catalog {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hotel-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+h1 {
+  text-align: left;
+}

@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from "./home/home.component";
+import {HomeComponent} from "./components/home/home.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { breadcrumb: 'Главная' } },
   {
     path: 'user',
-    loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+    loadChildren: () => import('./components/users/user.module').then(m => m.UserModule),
     data: { breadcrumb: 'Личный кабинет' }
   }
 ];

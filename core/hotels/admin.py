@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import Hotel, Room, Booking, Amenity, HotelImage, RoomImage
 
 from image_uploader_widget.admin import ImageUploaderInline
@@ -17,8 +18,15 @@ class RoomImageAdmin(ImageUploaderInline):
 
 
 class HotelAdmin(admin.ModelAdmin):
-    list_display = ('name', 'location', 'description')  # Отображаемые поля в списке
+    list_display = ('name', 'location', 'description', 'image_preview',)  # Отображаемые поля в списке
     search_fields = ('name', 'location')  # Поля, по которым можно осуществлять поиск
+
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="max-width: 100px; max-height: 100px;" />', obj.image.url)
+        return "No Image"
+
+    image_preview.short_description = 'Превью'
 
     inlines = [
         HotelImageAdmin,

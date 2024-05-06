@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Hotel} from "../models/hotels";
+import {Hotel} from "../shared/models/hotels";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";

@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 from users.models import User
 
 
@@ -10,6 +10,13 @@ class Hotel(models.Model):
     location = models.CharField(max_length=300, verbose_name="Местоположение")
     description = models.TextField(verbose_name="Описание")
     image = models.ImageField(verbose_name="Превью отеля", blank=True)
+    rating = models.PositiveIntegerField(verbose_name="Количество звезд",
+                                         validators=[MinValueValidator(0), MaxValueValidator(5)])
+
+    @property
+    def price(self):
+        min_price = self.room_set.aggregate(models.Min('price'))['price__min']
+        return min_price if min_price is not None else 0
 
     class Meta:
         verbose_name = 'Отель'
