@@ -29,13 +29,13 @@ class RoomSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Room
-        fields = ('room_number', 'room_type_display', 'images',)
+        fields = ('id', 'room_number', 'room_type_display', 'images',)
 
 
 class RoomDetailSerializer(RoomSerializer):
     class Meta:
         model = Room
-        fields = ('room_number', 'hotel', 'price', 'amenities', 'room_type', 'room_type_display', 'images',)
+        fields = ('id', 'room_number', 'hotel', 'price', 'amenities', 'room_type', 'room_type_display', 'images',)
 
 
 class HotelSerializer(serializers.ModelSerializer):

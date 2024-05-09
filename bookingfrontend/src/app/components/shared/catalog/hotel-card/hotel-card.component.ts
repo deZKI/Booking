@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Hotel} from "../../shared/models/hotels";
+import {Hotel} from "../../../../shared/models/hotels";
 import {Router} from "@angular/router";
 
 @Component({

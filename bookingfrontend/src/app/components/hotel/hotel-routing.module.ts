@@ -4,6 +4,7 @@ import {HotelDetailComponent} from "./hotel-detail/hotel-detail.component";
 
 const routes: Routes = [
   {path: ':id', component: HotelDetailComponent, data: {breadcrumb: 'Отели'}},
+  {path: ':id/room:id/', component: HotelDetailComponent, data: {breadcrumb: 'Отели'}},
 ];
 
 @NgModule({

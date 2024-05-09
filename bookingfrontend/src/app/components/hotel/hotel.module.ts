@@ -12,11 +12,13 @@ import {
   CarouselIndicatorsComponent,
   CarouselInnerComponent, CarouselItemComponent
 } from "@coreui/angular";
+import { RoomDetailComponent } from './room-detail/room-detail.component';
 
 
 @NgModule({
   declarations: [
     HotelDetailComponent,
+    RoomDetailComponent,
   ],
   imports: [
     CommonModule,
