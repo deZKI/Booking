@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {HotelDetail} from "../../shared/models/hotels";
-import {HotelsService} from "../../services/hotels.service";
+import {HotelDetail} from "../../../shared/models/hotels";
+import {HotelsService} from "../../../services/hotels.service";
 import {ActivatedRoute} from "@angular/router";
 import {take, tap} from "rxjs";
 

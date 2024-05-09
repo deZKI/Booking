@@ -92,3 +92,37 @@
     }
   }
 }
+
+.hotel-detail-rooms {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &__room {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    gap: 50px;
+  }
+
+  &__image {
+
+    img {
+      max-width: 100%;
+      width: 350px;
+    }
+  }
+
+  &__title {
+    color: rgb(0, 0, 0);
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 48px;
+    text-align: left;
+  }
+}

@@ -10,6 +10,7 @@ export interface Hotel {
 
 export interface HotelDetail extends Hotel {
   amenities: Amenity[]
+  rooms: Room[]
 }
 
 export interface Amenity {
@@ -17,8 +18,23 @@ export interface Amenity {
   image: string
 }
 
+export interface Room {
+  room_number: number
+  room_type_display: string
+  images: Image[]
+}
+
+export interface RoomDetail extends Room {
+  price: number
+  amenities: Amenity[]
+}
+
 export interface Service {
   title: string;
   description: string;
   image: string;
+}
+
+export interface Image {
+  image: string
 }

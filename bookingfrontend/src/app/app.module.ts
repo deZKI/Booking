@@ -16,7 +16,7 @@ import {AuthInterceptor} from "./auth.interceptor";
 import {AuthGuard} from "./auth.guard";
 import {AuthService} from "./services/auth.service";
 import {FormsModule} from "@angular/forms";
-import { HotelDetailComponent } from './components/hotel-detail/hotel-detail.component';
+import { HotelDetailComponent } from './components/hotel/hotel-detail/hotel-detail.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,6 @@ import { HotelDetailComponent } from './components/hotel-detail/hotel-detail.com
     HomeComponent,
     CatalogComponent,
     HotelCardComponent,
-    HotelDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-<div class="hotel-detail">
+<div class="hotel-detail" *ngIf="hotel">
   <h1 class="hotel-detail__section-title">Отель</h1>
 
   <div class="hotel-detail-header">
@@ -40,4 +40,36 @@
 
     </div>
   </div>
+
+  <h2 class="hotel-detail__section-title">Удобства</h2>
+
+  <div class="hotel-detail-rooms">
+    <div class="hotel-detail-rooms__room" *ngFor="let room of hotel.rooms">
+
+      <div class="hotel-detail-rooms__image">
+        <c-carousel [animate]="false" [pause]="'hover'">
+          <c-carousel-inner>
+            <c-carousel-item *ngFor="let image of room.images">
+              <img
+                [src]="image.image"
+                class="d-block"
+              />
+            </c-carousel-item>
+          </c-carousel-inner>
+          <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+          <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+        </c-carousel>
+      </div>
+
+      <div class="d-flex flex-wrap" style="gap: 50px">
+        <div class="hotel-detail-rooms__title">
+          {{ room.room_type_display }}
+        </div>
+        <button class="button" style="background: rgb(219, 184, 114)"><span
+          style="color: #ffffff">Забронировать</span></button>
+      </div>
+
+    </div>
+  </div>
+
 </div>

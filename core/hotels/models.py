@@ -44,8 +44,8 @@ class Room(models.Model):
     """Модель для представления номера в отеле."""
 
     class RoomType(models.TextChoices):
-        SINGLE = 'single', 'Одноместный'
-        DOUBLE = 'double', 'Двухместный'
+        SINGLE = 'single', 'Номер на 1 персону'
+        DOUBLE = 'double', 'Номер на 2 персоны'
         SUITE = 'suite', 'Люкс'
         FAMILY = 'family', 'Семейный'
 

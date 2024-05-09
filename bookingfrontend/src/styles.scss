@@ -21,7 +21,12 @@ body {
   border-radius: 16px;
 
   span {
-    color: #F0BF5F!important;
+    color: #F0BF5F;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: 0;
+    text-align: right;
   }
 
 }
