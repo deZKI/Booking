@@ -41,9 +41,9 @@
     </div>
   </div>
 
-  <h2 class="hotel-detail__section-title">Удобства</h2>
+  <h2 class="hotel-detail__section-title" *ngIf="hotel.rooms.length">Номера</h2>
 
-  <div class="hotel-detail-rooms">
+  <div class="hotel-detail-rooms" *ngIf="hotel.rooms.length">
     <div class="hotel-detail-rooms__room" *ngFor="let room of hotel.rooms">
 
       <div class="hotel-detail-rooms__image">
@@ -61,7 +61,7 @@
         </c-carousel>
       </div>
 
-      <div class="d-flex flex-wrap" style="gap: 50px">
+      <div class="hotel-detail-rooms__info">
         <div class="hotel-detail-rooms__title">
           {{ room.room_type_display }}
         </div>
