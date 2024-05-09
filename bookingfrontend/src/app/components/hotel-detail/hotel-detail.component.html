@@ -1,0 +1,43 @@
+<div class="hotel-detail">
+  <h1 class="hotel-detail__section-title">Отель</h1>
+
+  <div class="hotel-detail-header">
+
+    <div class="hotel-detail-header__image">
+      <img src="{{hotel.image}}">
+    </div>
+
+    <div class="hotel-detail-header-info">
+      <div class="hotel-detail-header-info__name">{{ hotel.name }}</div>
+      <div class="hotel-detail-header-info__location">{{ hotel.location }}</div>
+      <div class="hotel-detail-header-info__stars">
+        <span *ngFor="let star of getStars(hotel.rating); let i = index" class="star">★</span>
+      </div>
+
+      <div class="hotel-detail-header-info__booking">
+        <button mat-button class="hotel-detail__button"></button>
+      </div>
+
+    </div>
+  </div>
+
+  <h2 class="hotel-detail__section-title">Описание</h2>
+  <div class="hotel-detail__description">
+    <p>{{ hotel.description }}</p>
+  </div>
+
+  <h2 class="hotel-detail__section-title">Удобства</h2>
+  <div class="hotel-detail-services">
+    <div class="hotel-detail-services__service" *ngFor="let amenity of hotel.amenities">
+
+      <div class="hotel-detail-services__image">
+        <img src="{{amenity.image}}">
+      </div>
+
+      <div>
+        {{ amenity.name }}
+      </div>
+
+    </div>
+  </div>
+</div>

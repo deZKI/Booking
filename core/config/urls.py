@@ -11,7 +11,7 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
 )
 
-from hotels.views import HotelViewSet, RoomViewSet, BookingViewSet
+from hotels.views import HotelViewSet, RoomViewSet, BookingViewSet, ServiceViewSet
 from users.views import UserRegistrationAPIView
 
 schema_view = get_schema_view(
@@ -27,6 +27,7 @@ router = routers.DefaultRouter()
 router.register(r'hotels', HotelViewSet)
 router.register(r'rooms', RoomViewSet)
 router.register(r'bookings', BookingViewSet)
+router.register(r'services', ServiceViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
@@ -42,7 +43,6 @@ urlpatterns = [
     path('api/auth/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('api/auth/registration/', UserRegistrationAPIView.as_view(), name='user-registration'),
 ]
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

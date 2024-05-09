@@ -12,6 +12,7 @@ class Hotel(models.Model):
     image = models.ImageField(verbose_name="Превью отеля", blank=True)
     rating = models.PositiveIntegerField(verbose_name="Количество звезд",
                                          validators=[MinValueValidator(0), MaxValueValidator(5)])
+    amenities = models.ManyToManyField('Amenity', verbose_name="Удобства")
 
     @property
     def price(self):
@@ -29,6 +30,7 @@ class Hotel(models.Model):
 class Amenity(models.Model):
     """Модель для представления удобств, доступных в отеле или номере."""
     name = models.CharField(max_length=100, verbose_name="Название удобства")
+    image = models.ImageField(verbose_name='Изображение', blank=True)
 
     def __str__(self):
         return self.name
@@ -128,3 +130,14 @@ class RoomImage(models.Model):
     class Meta:
         verbose_name = 'Изображение номера'
         verbose_name_plural = 'Изображения номеров'
+
+
+class Service(models.Model):
+    """ Модель услуг """
+    title = models.CharField(max_length=128)
+    description = models.TextField()
+    image = models.ImageField(upload_to='services/', verbose_name="Изображение")
+
+    class Meta:
+        verbose_name = 'Услуга'
+        verbose_name_plural = 'Услуги'

@@ -3,4 +3,27 @@
   <div class="hotel-grid">
     <app-hotel-card *ngFor="let hotel of hotels" [hotel]="hotel"></app-hotel-card>
   </div>
+
+  <h1>О нас</h1>
+  <div class="about">
+    <p>Идейные соображения высшего порядка, а также сложившаяся структура организации влечет за собой процесс внедрения
+      и модернизации системы обучения кадров, соответствует насущным потребностям. Идейные соображения высшего порядка,
+      а также дальнейшее развитие различных форм деятельности представляет собой интересный эксперимент проверки системы
+      обучения кадров, соответствует насущным потребностям. Равным образом сложившаяся структура организации требуют
+      определения и уточнения существенных финансовых и административных условий.</p>
+  </div>
+
+  <h1>Услуги</h1>
+  <div class="services-container">
+    <div class="service-cards">
+      <div class="service-card" *ngFor="let service of services">
+        <img [src]="service.image" alt="{{ service.title }}">
+        <div class="service-info">
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

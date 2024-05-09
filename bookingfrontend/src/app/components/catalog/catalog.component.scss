@@ -1,15 +1,75 @@
 .catalog {
-  width: 80%;
-  margin: 0 auto;
   text-align: center;
 }
 
 .hotel-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 2rem;
 }
 
 h1 {
   text-align: left;
+}
+
+.about {
+  p {
+    text-align: left;
+  }
+}
+
+/* services.component.css */
+.services-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.service-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.service-card {
+  width: calc(50% - 20px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+
+  h3 {
+    /* H3 */
+    color: rgb(209, 165, 78);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    text-align: left;
+  }
+
+  p {
+    text-align: left;
+  }
+}
+
+.service-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.service-info {
+  padding: 10px 15px;
+}
+
+.service-info h3 {
+  margin-top: 0;
+}
+
+@media (max-width: 600px) {
+  .service-card {
+    width: 100%;
+  }
 }

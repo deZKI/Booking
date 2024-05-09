@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Hotel, Room, Booking, Amenity, HotelImage, RoomImage
+from .models import Hotel, Room, Booking, Amenity, HotelImage, RoomImage, Service
 
 from image_uploader_widget.admin import ImageUploaderInline
 
@@ -53,8 +53,13 @@ class BookingAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'room__room_number', 'status')  # Поиск по полям
 
 
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = ('title', )
+
+
 # Регистрация моделей и их админ-классов
 admin.site.register(Hotel, HotelAdmin)
 admin.site.register(Amenity, AmenityAdmin)
 admin.site.register(Room, RoomAdmin)
 admin.site.register(Booking, BookingAdmin)
+admin.site.register(Service, ServiceAdmin)

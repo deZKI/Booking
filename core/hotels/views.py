@@ -1,13 +1,24 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Hotel, Room, Booking
-from .serializers import HotelSerializer, RoomSerializer, BookingCreationSerializer, BookingSerializer
+from .models import Hotel, Room, Booking, Service
+from .serializers import HotelSerializer, RoomSerializer, BookingCreationSerializer, BookingSerializer, \
+    ServiceSerializer, HotelDetailSerializer
 
 
 class HotelViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Hotel.objects.all()
     serializer_class = HotelSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return HotelSerializer
+        return HotelDetailSerializer
+
+
+class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
 
 
 class RoomViewSet(viewsets.ReadOnlyModelViewSet):

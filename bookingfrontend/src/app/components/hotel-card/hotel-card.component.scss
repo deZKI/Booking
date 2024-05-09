@@ -6,6 +6,7 @@
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: white;
+  height: 350px;
 }
 
 .hotel-card img {
@@ -23,6 +24,11 @@
 .hotel-name,
 .hotel-location {
   margin-bottom: 5px;
+}
+
+.hotel-location {
+  height: 40px;
+  text-overflow: ellipsis;
 }
 
 .hotel-rating {

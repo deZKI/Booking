@@ -2,7 +2,13 @@ from django.core.exceptions import ValidationError
 
 from rest_framework import serializers
 
-from .models import Hotel, Room, Booking
+from .models import Hotel, Room, Booking, Service, Amenity
+
+
+class AmenitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Amenity
+        fields = '__all__'
 
 
 class HotelSerializer(serializers.ModelSerializer):
@@ -13,7 +19,15 @@ class HotelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Hotel
-        fields = '__all__'
+        fields = ('id', 'name', 'location', 'description', 'image', 'rating', 'price',)
+
+
+class HotelDetailSerializer(HotelSerializer):
+    amenities = AmenitySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Hotel
+        fields = ('id', 'name', 'location', 'description', 'image', 'rating', 'price', 'amenities')
 
 
 class RoomSerializer(serializers.ModelSerializer):
@@ -49,4 +63,10 @@ class BookingCreationSerializer(serializers.ModelSerializer):
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
+        fields = '__all__'
+
+
+class ServiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Service
         fields = '__all__'
