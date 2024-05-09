@@ -19,6 +19,7 @@ export interface Amenity {
 }
 
 export interface Room {
+  id: number
   room_number: number
   room_type_display: string
   images: Image[]

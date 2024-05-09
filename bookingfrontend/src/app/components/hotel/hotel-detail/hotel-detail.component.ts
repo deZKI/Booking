@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {HotelDetail} from "../../../shared/models/hotels";
+import {HotelDetail, Room} from "../../../shared/models/hotels";
 import {HotelsService} from "../../../services/hotels.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {take, tap} from "rxjs";
 
 @Component({
@@ -16,6 +16,7 @@ export class HotelDetailComponent implements OnInit {
   constructor(
     private hotelService: HotelsService,
     private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
@@ -29,5 +30,9 @@ export class HotelDetailComponent implements OnInit {
 
   getStars(rating: number): any[] {
     return new Array(rating);
+  }
+
+  navigateToRoomDetail(room: Room) {
+    this.router.navigate([this.router.url + '/room/' + room.id]);
   }
 }
