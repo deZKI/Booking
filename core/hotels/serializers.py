@@ -73,7 +73,10 @@ class BookingCreationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         """Переопределяем метод создания для обработки исключений."""
         try:
+            price = validated_data['room'].price
+            validated_data['price'] = price
             return super().create(validated_data)
+
         except ValidationError as e:
             raise serializers.ValidationError({'non_field_errors': e.messages})
 
@@ -86,6 +89,8 @@ class BookingCreationSerializer(serializers.ModelSerializer):
 
 
 class BookingSerializer(serializers.ModelSerializer):
+    room = RoomSerializer()
+
     class Meta:
         model = Booking
         fields = '__all__'
