@@ -35,29 +35,22 @@
         <div class="room-detail-info-date-selector">
 
           <div class="room-detail-info-date-selector">
+
             <mat-form-field>
-              <label>
-                <input matInput [matDatepickerFilter]="dateFilter" required [matDatepicker]="picker" placeholder="Choose a date"
-                       formControlName="date">
-              </label>
+              <mat-label>Даты заселения</mat-label>
+              <mat-date-range-input [dateFilter]="dateFilter" [rangePicker]="picker">
+                <input formControlName="arrivalDate" matStartDate placeholder="С" [min]="minDate">
+                <input formControlName="departureDate" matEndDate placeholder="По" [min]="minDate">
+              </mat-date-range-input>
+              <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
+              <mat-date-range-picker #picker></mat-date-range-picker>
             </mat-form-field>
+            <div *ngIf="bookingForm.hasError('dateRangeInvalid')" class="error-message">
+              {{ bookingForm.getError('dateRangeInvalid') }}
+            </div>
 
           </div>
-
-          <div class="room-detail-info-date-selector__input">
-            <input formControlName="arrivalDate"  [matDatepickerFilter]="dateFilter" matInput [matDatepicker]="arrivalPicker" placeholder="Дата заезда">
-            <mat-datepicker-toggle matSuffix [for]="arrivalPicker"></mat-datepicker-toggle>
-            <mat-datepicker #arrivalPicker></mat-datepicker>
-          </div>
-          <div class="room-detail-info-date-selector__dash"></div>
-          <div class="room-detail-info-date-selector__input">
-            <input formControlName="departureDate"  [matDatepickerFilter]="dateFilter" matInput [matDatepicker]="departurePicker" placeholder="Дата выезда">
-            <mat-datepicker-toggle matSuffix [for]="departurePicker"></mat-datepicker-toggle>
-            <mat-datepicker #departurePicker></mat-datepicker>
-          </div>
-
 
         </div>
       </div>

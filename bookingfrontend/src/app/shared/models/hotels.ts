@@ -42,8 +42,8 @@ export interface Image {
 }
 
 export interface BookingDates {
-  check_in: Date,
-  check_out: Date,
+  check_in: string,
+  check_out: string,
 }
 
 export interface BookingCreation extends BookingDates {
