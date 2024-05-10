@@ -47,16 +47,23 @@ export interface BookingDates {
 }
 
 export interface BookingCreation extends BookingDates {
-  room: Room | number;
+  room: number
   guest_surname: string,
   guest_name: string,
   guest_number: string,
   guest_email: string
 }
 
-export interface Booking extends BookingCreation {
+export interface Booking {
   id: number;
+  room: RoomDetail;
   price: number;
   status: string;
-  user: number
+  user: number;
+  check_in: string,
+  check_out: string,
+  guest_surname: string,
+  guest_name: string,
+  guest_number: string,
+  guest_email: string
 }

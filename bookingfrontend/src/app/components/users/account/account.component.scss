@@ -1,0 +1,31 @@
+
+.account {
+  display: flex;
+  flex-direction: column;
+}
+
+.bookings-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+mat-card {
+  width: 300px;
+  transition: box-shadow 0.3s;
+}
+
+mat-card:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.booking-image img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+mat-card-header {
+  align-items: center;
+}

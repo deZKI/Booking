@@ -1,0 +1,27 @@
+<div class="account">
+  <div class="d-flex justify-content-end">
+    <button class="button" mat-button (click)="logout()">
+      <span>Выйти</span>
+    </button>
+  </div>
+  <div class="bookings-container">
+    <mat-card *ngFor="let booking of bookings">
+      <mat-card-header>
+        <div mat-card-avatar class="booking-image">
+          <img mat-card-image [src]="booking.room.hotel.image" alt="Hotel image">
+        </div>
+        <mat-card-title>{{ booking.room.hotel.name }}</mat-card-title>
+        <mat-card-subtitle>{{ booking.room.room_type_display }} - Room {{ booking.room.room_number }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="booking.room.images[0]?.image" alt="Room image">
+      <mat-card-content>
+        <p>{{ booking.room.hotel.location }}</p>
+        <p>Check-in: {{ booking.check_in | date }}</p>
+        <p>Check-out: {{ booking.check_out | date }}</p>
+        <p>Price: {{ booking.price | currency }}</p>
+        <p>Status: {{ booking.status }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

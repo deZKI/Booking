@@ -89,7 +89,7 @@ class BookingCreationSerializer(serializers.ModelSerializer):
 
 
 class BookingSerializer(serializers.ModelSerializer):
-    room = RoomSerializer()
+    room = RoomDetailSerializer()
 
     class Meta:
         model = Booking

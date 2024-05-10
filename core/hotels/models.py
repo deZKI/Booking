@@ -1,6 +1,10 @@
+import json
+
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
+
+from rabbitmq.notification import send_booking_notification
 from users.models import User
 
 
@@ -115,6 +119,20 @@ class Booking(models.Model):
             self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         self.clean()
+        message = json.dumps({
+            'room_id': self.room.id,
+            'user_id': self.user.id,
+            'status': self.status,
+            'price': int(self.price),
+            'check_in': str(self.check_in),
+            'check_out': str(self.check_out),
+            'guest_surname': self.guest_surname,
+            'guest_name': self.guest_name,
+            'guest_number': self.guest_surname,
+            'guest_email': self.guest_surname,
+        })
+        send_booking_notification(message)
+
         super(Booking, self).save(force_insert, force_update, using, update_fields)  # Вызов оригинального метода save
 
 

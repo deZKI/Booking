@@ -140,6 +140,10 @@ RABBITMQ = {
     "PORT": os.getenv("RABBITMQ_PORT", 5672),
     "USER": os.getenv("RABBITMQ_USER", "guest"),
     "PASSWORD": os.getenv("RABBITMQ_PASSWORD", "guest"),
+    "EXCHANGE": "notifications",
+    "EXCHANGE_TYPE": "topic",
+    "ROUTING_KEY": "booking.notification",
+    "QUEUE": "booking_queue"
 }
 
 REST_FRAMEWORK = {
