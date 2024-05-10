@@ -23,21 +23,6 @@ class RoomImageSerializer(serializers.ModelSerializer):
         fields = ['image']
 
 
-class RoomSerializer(serializers.ModelSerializer):
-    room_type_display = serializers.CharField(source='get_room_type_display')  # Выводит полное название типа комнаты
-    images = RoomImageSerializer(many=True)
-
-    class Meta:
-        model = Room
-        fields = ('id', 'room_number', 'room_type_display', 'images',)
-
-
-class RoomDetailSerializer(RoomSerializer):
-    class Meta:
-        model = Room
-        fields = ('id', 'room_number', 'hotel', 'price', 'amenities', 'room_type', 'room_type_display', 'images',)
-
-
 class HotelSerializer(serializers.ModelSerializer):
     price = serializers.SerializerMethodField()
 
@@ -47,6 +32,24 @@ class HotelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hotel
         fields = ('id', 'name', 'location', 'description', 'image', 'rating', 'price',)
+
+
+class RoomSerializer(serializers.ModelSerializer):
+    room_type_display = serializers.CharField(source='get_room_type_display')  # Выводит полное название типа комнаты
+    images = RoomImageSerializer(many=True)
+    amenities = AmenitySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Room
+        fields = ('id', 'room_number', 'room_type_display', 'images', 'amenities',)
+
+
+class RoomDetailSerializer(RoomSerializer):
+    hotel = HotelSerializer(read_only=True)
+
+    class Meta:
+        model = Room
+        fields = ('id', 'room_number', 'hotel', 'price', 'amenities', 'room_type', 'room_type_display', 'images',)
 
 
 class HotelDetailSerializer(HotelSerializer):

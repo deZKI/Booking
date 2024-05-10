@@ -80,6 +80,7 @@ class Booking(models.Model):
 
     room = models.ForeignKey(Room, on_delete=models.CASCADE, verbose_name="Забронированный номер")
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь")
+    price = models.DecimalField(max_digits=6, decimal_places=2, verbose_name="Цена за ночь")
     check_in = models.DateField(verbose_name="Дата заезда")
     check_out = models.DateField(verbose_name="Дата выезда")
     guests = models.IntegerField(verbose_name="Количество гостей")
