@@ -41,16 +41,18 @@ export interface Image {
   image: string
 }
 
-export interface BookingCreation {
-  room: Room | number;
+export interface BookingDates {
   check_in: Date,
   check_out: Date,
+}
+
+export interface BookingCreation extends BookingDates {
+  room: Room | number;
   guest_surname: string,
   guest_name: string,
   guest_number: string,
   guest_email: string
 }
-
 
 export interface Booking extends BookingCreation {
   id: number;

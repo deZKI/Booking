@@ -27,7 +27,9 @@ export class LoginRegisterComponent {
 
     if (this.isLoginMode) {
       this.authService.login(this.email, this.password).subscribe(() => {
-        this.router.navigate(['/']);
+        let returnUrl = localStorage.getItem('returnUrl') || '/';
+        localStorage.removeItem('returnUrl');
+        this.router.navigateByUrl(returnUrl);
       }, error => {
         this.errorMessage = 'Ошибка входа. Проверьте ваши учетные данные.';
       });

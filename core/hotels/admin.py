@@ -48,7 +48,7 @@ class RoomAdmin(admin.ModelAdmin):
 
 
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('room', 'user', 'check_in', 'check_out', 'guests', 'status')  # Отображаемые поля
+    list_display = ('room', 'user', 'check_in', 'check_out', 'status')  # Отображаемые поля
     list_filter = ('status', 'check_in', 'check_out')  # Фильтры
     search_fields = ('user__username', 'room__room_number', 'status')  # Поиск по полям
 

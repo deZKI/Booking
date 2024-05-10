@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {BookingCreation, RoomDetail} from "../../../shared/models/hotels";
+import {BookingCreation, BookingDates, RoomDetail} from "../../../shared/models/hotels";
 import {HotelsService} from "../../../services/hotels.service";
 import {ActivatedRoute} from "@angular/router";
 import {take, tap} from "rxjs";
-import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {BookingService} from "../../../services/booking.service";
-import {differenceInCalendarDays} from 'date-fns';
+import {addDays, differenceInCalendarDays, format} from 'date-fns';
 
 @Component({
   selector: 'app-room-detail',
@@ -19,6 +19,7 @@ export class RoomDetailComponent implements OnInit {
   bookingForm!: FormGroup;
   totalCost: number = 0
   nightsCount: number = 0
+  bookedDates: Date[] = [];
 
   constructor(
     private hotelService: HotelsService,
@@ -35,6 +36,10 @@ export class RoomDetailComponent implements OnInit {
       take(1),
       tap(room => {
         this.room = room
+      })
+    ).subscribe()
+    this.bookingService.getBookingsDates(this.roomId).pipe(take(1), tap(bookings => {
+        this.bookedDates = this.flattenBookings(bookings);
       })
     ).subscribe()
     this.initForm();
@@ -66,7 +71,11 @@ export class RoomDetailComponent implements OnInit {
         guest_email: this.bookingForm.get('email')?.value
       };
       this.bookingService.createBooking(bookingData).pipe(
-        take(1)
+        take(1),
+        tap(response => {
+
+          alert('Номер успешно забронирован. С вами свяжутся.')
+        })
       ).subscribe()
     }
   }
@@ -76,12 +85,27 @@ export class RoomDetailComponent implements OnInit {
   }
 
   private dateRangeValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      const arrival = control.get('arrivalDate');
-      const departure = control.get('departureDate');
-      return arrival && departure && arrival.value < departure.value ? null : {'dateRange': true};
+    return (group: AbstractControl): ValidationErrors | null => {
+      const arrival = group.get('arrivalDate');
+      const departure = group.get('departureDate');
+      if (!arrival || !departure || !arrival.value || !departure.value) {
+        return null; // Нет смысла валидировать, если даты не выбраны
+      }
+      const arrivalDate = new Date(arrival.value);
+      const departureDate = new Date(departure.value);
+      const isArrivalBooked = this.bookedDates.some(date =>
+        format(date, 'yyyy-MM-dd') === format(arrivalDate, 'yyyy-MM-dd'));
+      const isDepartureBooked = this.bookedDates.some(date =>
+        format(date, 'yyyy-MM-dd') === format(departureDate, 'yyyy-MM-dd'));
+
+      if (isArrivalBooked || isDepartureBooked) {
+        return { 'dateIsBooked': true };
+      }
+
+      return arrival.value < departure.value ? null : { 'dateRange': true };
     };
   }
+
 
   private calculateTotal() {
     const arrivalDate = new Date(this.bookingForm.get('arrivalDate')!.value);
@@ -99,4 +123,26 @@ export class RoomDetailComponent implements OnInit {
       this.totalCost = 0;
     }
   }
+
+  private flattenBookings(bookings: BookingDates[]): Date[] {
+    const dates: Date[] = [];
+    bookings.forEach(booking => {
+      const start = new Date(booking.check_in);
+      const end = new Date(booking.check_out);
+      let current = start;
+      while (current <= end) {
+        dates.push(new Date(current));
+        current = addDays(current, 1);
+      }
+    });
+    return dates;
+  }
+
+  public dateFilter = (d: Date | null): boolean => {
+    if (!d) {
+      return false;
+    }
+    const dateStr = format(d, 'yyyy-MM-dd');
+    return !this.bookedDates.find(x => format(x, 'yyyy-MM-dd') === dateStr);
+  };
 }

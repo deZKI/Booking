@@ -13,6 +13,10 @@ import {
   CarouselInnerComponent, CarouselItemComponent
 } from "@coreui/angular";
 import { RoomDetailComponent } from './room-detail/room-detail.component';
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 
 
 @NgModule({
@@ -25,6 +29,10 @@ import { RoomDetailComponent } from './room-detail/room-detail.component';
     FormsModule,
     MatIcon,
     MatButton,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
     HotelRoutingModule,
     HttpClientModule,
     CarouselComponent,

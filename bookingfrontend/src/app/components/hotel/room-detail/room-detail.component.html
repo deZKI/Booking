@@ -34,13 +34,30 @@
       <div class="room-detail-info-date">
         <div class="room-detail-info-date-selector">
 
+          <div class="room-detail-info-date-selector">
+            <mat-form-field>
+              <label>
+                <input matInput [matDatepickerFilter]="dateFilter" required [matDatepicker]="picker" placeholder="Choose a date"
+                       formControlName="date">
+              </label>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+          </div>
+
           <div class="room-detail-info-date-selector__input">
-            <input formControlName="arrivalDate" type="date">
+            <input formControlName="arrivalDate"  [matDatepickerFilter]="dateFilter" matInput [matDatepicker]="arrivalPicker" placeholder="Дата заезда">
+            <mat-datepicker-toggle matSuffix [for]="arrivalPicker"></mat-datepicker-toggle>
+            <mat-datepicker #arrivalPicker></mat-datepicker>
           </div>
           <div class="room-detail-info-date-selector__dash"></div>
           <div class="room-detail-info-date-selector__input">
-            <input formControlName="departureDate" type="date">
+            <input formControlName="departureDate"  [matDatepickerFilter]="dateFilter" matInput [matDatepicker]="departurePicker" placeholder="Дата выезда">
+            <mat-datepicker-toggle matSuffix [for]="departurePicker"></mat-datepicker-toggle>
+            <mat-datepicker #departurePicker></mat-datepicker>
           </div>
+
 
         </div>
       </div>

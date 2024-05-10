@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRouteSnapshot, Router, RouterStateSnapshot} from '@angular/router';
 import {AuthService} from './services/auth.service';
 
 @Injectable({
@@ -10,11 +10,13 @@ export class AuthGuard {
   constructor(private authService: AuthService, private router: Router) {
   }
 
-  canActivate(): boolean {
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.authService.isAuthenticated()) {
       return true;
     } else {
-      this.router.navigate(['/login']);
+      // Сохраняем URL, с которого был сделан запрос
+      localStorage.setItem('returnUrl', state.url);
+      this.router.navigate(['user/login']);
       return false;
     }
   }

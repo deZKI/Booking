@@ -96,6 +96,12 @@ class BookingSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class BookingDateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Booking
+        fields = ('check_in', 'check_out')
+
+
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service

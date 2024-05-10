@@ -83,7 +83,12 @@ class Booking(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2, verbose_name="Цена за ночь")
     check_in = models.DateField(verbose_name="Дата заезда")
     check_out = models.DateField(verbose_name="Дата выезда")
-    guests = models.IntegerField(verbose_name="Количество гостей")
+
+    guest_surname = models.CharField(verbose_name='Фамилия Гостя')
+    guest_name = models.CharField(verbose_name='Имя Гостя')
+    guest_number = models.CharField(verbose_name='Номер телефона Гостя')
+    guest_email = models.EmailField(verbose_name='Почта Гостя')
+
     status = models.CharField(
         max_length=20,
         choices=BookingStatus.choices,
