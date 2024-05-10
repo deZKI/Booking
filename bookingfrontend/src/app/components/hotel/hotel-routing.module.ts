@@ -5,7 +5,7 @@ import {RoomDetailComponent} from "./room-detail/room-detail.component";
 
 const routes: Routes = [
   {path: ':id', component: HotelDetailComponent, data: {breadcrumb: 'Отели'}},
-  {path: ':hotelId/room/:roomId', component: RoomDetailComponent}
+  {path: ':hotelId/room/:roomId', component: RoomDetailComponent, data: {breadcrumb: 'Номера'}}
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HotelDetailComponent} from "./hotel-detail/hotel-detail.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
@@ -32,6 +32,7 @@ import { RoomDetailComponent } from './room-detail/room-detail.component';
     CarouselInnerComponent,
     CarouselControlComponent,
     CarouselItemComponent,
+    ReactiveFormsModule,
   ]
 })
 export class HotelModule {

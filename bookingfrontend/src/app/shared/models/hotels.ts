@@ -28,6 +28,7 @@ export interface Room {
 export interface RoomDetail extends Room {
   price: number
   amenities: Amenity[]
+  hotel: Hotel
 }
 
 export interface Service {

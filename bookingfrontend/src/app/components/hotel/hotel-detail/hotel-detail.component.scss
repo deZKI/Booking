@@ -55,18 +55,6 @@
   &__location {
     text-align: right;
   }
-
-  &__stars {
-    display: flex;
-    justify-content: end;
-    font-size: 32px;
-
-    span {
-      color: gold;
-      margin-right: 2px;
-    }
-
-  }
 }
 
 .hotel-detail-amenities {

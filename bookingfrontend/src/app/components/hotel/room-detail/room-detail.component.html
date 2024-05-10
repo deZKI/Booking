@@ -1,1 +1,91 @@
-<p>room-detail works!</p>
+<div *ngIf="room" [formGroup]="bookingForm" class="d-flex flex-column" style="gap: 20px">
+
+  <div class="room-detail">
+
+    <div class="room-detail-image">
+      <h1>Бронирование номера</h1>
+      <div class="room-detail-image__image">
+        <c-carousel [animate]="false" [pause]="'hover'">
+          <c-carousel-inner>
+            <c-carousel-item *ngFor="let image of room.images">
+              <img
+                [src]="image.image"
+                class="d-block"
+              />
+            </c-carousel-item>
+          </c-carousel-inner>
+          <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+          <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+        </c-carousel>
+      </div>
+    </div>
+
+    <div class="room-detail-info">
+      <div class="room-detail-info-header">
+        <div class="stars">
+          <span *ngFor="let star of getStars(room.hotel.rating); let i = index" class="star">★</span>
+        </div>
+        <div class="room-detail-info-header__title">
+          {{ room.hotel.name }}
+        </div>
+      </div>
+
+      <h2 class="room-detail__title">Время заезда</h2>
+      <div class="room-detail-info-date">
+        <div class="room-detail-info-date-selector">
+
+          <div class="room-detail-info-date-selector__input">
+            <input formControlName="arrivalDate" type="date">
+          </div>
+          <div class="room-detail-info-date-selector__dash"></div>
+          <div class="room-detail-info-date-selector__input">
+            <input formControlName="departureDate" type="date">
+          </div>
+
+        </div>
+      </div>
+
+      <div class="dash"></div>
+
+      <div class="room-detail__title">{{ room.room_type_display }}</div>
+
+      <div class="dash"></div>
+
+      <div class="room-detail__title">Удобства номера</div>
+      <div class="room-detail-info-amenities">
+        <div class="room-detail-info-amenities__amenity" *ngFor="let amenity of room.amenities">
+          <div class="room-detail-info-amenities__image">
+            <img src="{{amenity.image}}">
+            {{ amenity.name }}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="room-detail room-detail-booking">
+    <div class="room-detail__title room-detail__title__booking">Данные гостя</div>
+    <div class="room-detail-booking-input">
+      <input formControlName="surname" placeholder="фамилия" class="room-detail__input">
+      <input formControlName="name" placeholder="имя" class="room-detail__input">
+    </div>
+  </div>
+
+  <div class="room-detail room-detail-booking">
+    <div class="room-detail__title room-detail__title__booking">Контактная информация</div>
+    <div class="room-detail-booking-input">
+      <input formControlName="email" type="email" placeholder="e-mail" class="room-detail__input">
+      <input formControlName="phone" type="tel" placeholder="телефон" class="room-detail__input">
+    </div>
+  </div>
+
+  <div class="room-detail room-detail-booking">
+    <div class="room-detail__title room-detail__title__booking">Итого</div>
+    <div class="d-flex flex-row flex-wrap">
+      <button type="submit" (click)="bookRoom()">Забронировать</button>
+    </div>
+  </div>
+
+</div>

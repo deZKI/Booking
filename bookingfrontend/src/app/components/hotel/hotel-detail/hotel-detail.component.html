@@ -10,7 +10,7 @@
     <div class="hotel-detail-header-info">
       <div class="hotel-detail-header-info__name">{{ hotel.name }}</div>
       <div class="hotel-detail-header-info__location">{{ hotel.location }}</div>
-      <div class="hotel-detail-header-info__stars">
+      <div class="stars">
         <span *ngFor="let star of getStars(hotel.rating); let i = index" class="star">★</span>
       </div>
 

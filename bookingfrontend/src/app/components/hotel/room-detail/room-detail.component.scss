@@ -1,0 +1,177 @@
+.room-detail {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15%;
+  background: #FFFFFF;
+  padding: 40px;
+  border-radius: 20px;
+
+  &__title {
+    color: rgb(0, 0, 0);
+    font-size:  clamp(16px, 2.5vw, 24px);;
+    font-weight: 400;
+    line-height: 29px;
+    text-align: right;
+
+    &__booking {
+      text-align: left;
+      width: 200px;
+    }
+  }
+
+  &__input {
+    box-sizing: border-box;
+    border: 1px solid rgb(209, 165, 78);
+    border-radius: 16px;
+    width: 308.5px;
+    height: 64px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 16px 24px 16px 24px;
+  }
+}
+
+.room-detail-image {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  h1 {
+    color: rgb(0, 0, 0);
+    font-size: clamp(24px, 2.5vw, 48px);
+    font-weight: 400;
+    line-height: 58px;
+    text-align: left;
+  }
+
+  &__image {
+    max-width: 600px;
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+
+.room-detail-info {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+
+  &-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    &__title {
+      color: rgb(0, 0, 0);
+      font-size: clamp(24px, 2.5vw, 36px);
+      font-weight: 700;
+      line-height: 44px;
+      text-align: right;
+      max-width: 350px;
+
+    }
+  }
+
+  &-date {
+    display: flex;
+    flex-direction: column;
+
+    &-selector {
+      display: inline-flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+
+      @media (max-width: 400px) {
+        flex-direction: column;
+      }
+
+      &__dash {
+        border: 2px solid rgb(0, 0, 0);
+        width:  clamp(24px, 2.5vw, 104px);
+        max-width: 30%;
+        height: 0;
+        flex: none;
+        flex-grow: 0;
+        margin: 0 10px;
+
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
+
+      &__input {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        input {
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          padding: 5px;
+          font-size: 16px;
+          width: 100%;
+          height: 100%;
+        }
+        height: 64px;
+        @media (max-width: 400px) {
+          width: 100%;
+        }
+
+      }
+    }
+  }
+
+  &-amenities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    &__aamenity {
+      color: rgb(0, 0, 0);
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 150%;
+      text-align: left;
+    }
+  }
+}
+
+.dash {
+  border: 0.5px solid rgb(188, 188, 188);
+}
+
+.room-detail-booking {
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  &-input {
+    display: flex;
+    gap: 20px;
+
+    @media (max-width: 767px) {
+      flex-wrap: wrap;
+      width: 100%;
+
+      input {
+        width: 100%;
+      }
+    }
+  }
+
+  &__title {
+
+  }
+}
