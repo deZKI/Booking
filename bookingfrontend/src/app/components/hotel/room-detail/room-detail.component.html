@@ -84,7 +84,12 @@
   <div class="room-detail room-detail-booking">
     <div class="room-detail__title room-detail__title__booking">Итого</div>
     <div class="d-flex flex-row flex-wrap">
-      <button type="submit" (click)="bookRoom()">Забронировать</button>
+      <div class="room-detail__title room-detail__title__booking">{{ nightsCount }} ночей</div>
+      <div class="room-detail__title room-detail__title__booking">{{ totalCost }} рублей</div>
+      <button type="submit" class="button room-detail-booking__button"
+              [disabled]="bookingForm.invalid" (click)="bookRoom()">
+        <span>Забронировать</span>
+      </button>
     </div>
   </div>
 

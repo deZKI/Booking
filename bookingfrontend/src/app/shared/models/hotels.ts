@@ -40,3 +40,21 @@ export interface Service {
 export interface Image {
   image: string
 }
+
+export interface BookingCreation {
+  room: Room | number;
+  check_in: Date,
+  check_out: Date,
+  guest_surname: string,
+  guest_name: string,
+  guest_number: string,
+  guest_email: string
+}
+
+
+export interface Booking extends BookingCreation {
+  id: number;
+  price: number;
+  status: string;
+  user: number
+}

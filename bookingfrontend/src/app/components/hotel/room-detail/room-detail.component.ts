@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {RoomDetail} from "../../../shared/models/hotels";
+import {BookingCreation, RoomDetail} from "../../../shared/models/hotels";
 import {HotelsService} from "../../../services/hotels.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {take, tap} from "rxjs";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from "@angular/forms";
+import {BookingService} from "../../../services/booking.service";
+import {differenceInCalendarDays} from 'date-fns';
 
 @Component({
   selector: 'app-room-detail',
@@ -15,11 +17,14 @@ export class RoomDetailComponent implements OnInit {
   hotelId!: number;
   roomId!: number;
   bookingForm!: FormGroup;
+  totalCost: number = 0
+  nightsCount: number = 0
 
   constructor(
     private hotelService: HotelsService,
+    private bookingService: BookingService,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
   }
 
@@ -39,18 +44,30 @@ export class RoomDetailComponent implements OnInit {
     this.bookingForm = this.fb.group({
       surname: ['', Validators.required],
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      email: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
       arrivalDate: ['', Validators.required],
       departureDate: ['', Validators.required]
-    });
+    }, {validator: this.dateRangeValidator()});
+    this.bookingForm.get('arrivalDate')!.valueChanges.subscribe(_ => this.calculateTotal());
+    this.bookingForm.get('departureDate')!.valueChanges.subscribe(_ => this.calculateTotal());
+
   }
 
   bookRoom() {
-    console.log('Booking data:', this.bookingForm.value);
     if (this.bookingForm.valid) {
-      // Логика отправки данных для бронирования
-      console.log('Booking data:', this.bookingForm.value);
+      const bookingData: BookingCreation = {
+        room: this.roomId,
+        check_in: this.bookingForm.get('arrivalDate')?.value,
+        check_out: this.bookingForm.get('departureDate')?.value,
+        guest_surname: this.bookingForm.get('surname')?.value,
+        guest_name: this.bookingForm.get('name')?.value,
+        guest_number: this.bookingForm.get('phone')?.value,
+        guest_email: this.bookingForm.get('email')?.value
+      };
+      this.bookingService.createBooking(bookingData).pipe(
+        take(1)
+      ).subscribe()
     }
   }
 
@@ -58,4 +75,28 @@ export class RoomDetailComponent implements OnInit {
     return new Array(rating);
   }
 
+  private dateRangeValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const arrival = control.get('arrivalDate');
+      const departure = control.get('departureDate');
+      return arrival && departure && arrival.value < departure.value ? null : {'dateRange': true};
+    };
+  }
+
+  private calculateTotal() {
+    const arrivalDate = new Date(this.bookingForm.get('arrivalDate')!.value);
+    const departureDate = new Date(this.bookingForm.get('departureDate')!.value);
+
+    if (isNaN(arrivalDate.getTime()) || isNaN(departureDate.getTime())) {
+      return;
+    }
+
+    this.nightsCount = differenceInCalendarDays(departureDate, arrivalDate);
+
+    if (this.nightsCount > 0) {
+      this.totalCost = this.nightsCount * this.room.price;
+    } else {
+      this.totalCost = 0;
+    }
+  }
 }

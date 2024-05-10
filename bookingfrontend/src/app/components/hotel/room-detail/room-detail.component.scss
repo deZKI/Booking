@@ -171,6 +171,19 @@
     }
   }
 
+  &__button {
+    background: rgb(219, 184, 114);
+    padding: 8px;
+
+    span {
+      color: #ffffff;
+    }
+
+    &:disabled {
+      background: #6c757d!important;
+    }
+  }
+
   &__title {
 
   }

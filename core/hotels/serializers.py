@@ -68,7 +68,7 @@ class BookingCreationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Booking
-        fields = ('room', 'check_in', 'check_out', 'guests', 'user',)
+        fields = ('room', 'check_in', 'check_out', 'user', 'guest_surname', 'guest_name', 'guest_number', 'guest_email')
 
     def create(self, validated_data):
         """Переопределяем метод создания для обработки исключений."""
