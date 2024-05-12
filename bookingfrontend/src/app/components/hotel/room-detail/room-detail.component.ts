@@ -3,13 +3,10 @@ import {BookingCreation, BookingDates, RoomDetail} from "../../../shared/models/
 import {HotelsService} from "../../../services/hotels.service";
 import {ActivatedRoute} from "@angular/router";
 import {of, take, tap} from "rxjs";
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 import {BookingService} from "../../../services/booking.service";
 import {addDays, differenceInCalendarDays, format} from 'date-fns';
-import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
-import {MatCalendarCellClassFunction} from "@angular/material/datepicker";
 import {catchError} from "rxjs/operators";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-room-detail',
