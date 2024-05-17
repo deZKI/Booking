@@ -22,7 +22,7 @@ services:
       - RABBITMQ_HOST=rabbitmq
 
   notification_service:
-    build: notification_service
+    build: noti_center
     env_file:
       - .env
     volumes:
