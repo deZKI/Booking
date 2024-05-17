@@ -6,6 +6,7 @@ services:
     volumes:
       - static_volume:/app/static/
       - media_volume:/app/media/
+      - core_volume:/app
     entrypoint: ["sh", "entrypoint.sh"]
     ports:
       - "8000"
@@ -19,6 +20,23 @@ services:
       - POSTGRES_HOST=postgres_db
       - REDIS_HOST=redis
       - RABBITMQ_HOST=rabbitmq
+
+  notification_service:
+    build: notification_service
+    env_file:
+      - .env
+    volumes:
+      - notification_service_volume:/app
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+
+  frontend:
+    build: bookingfrontend
+    ports:
+      - "4200:4200"
 
   postgres_db:
     image: postgres:16
@@ -36,21 +54,8 @@ services:
       - static_volume:/app/static
       - media_volume:/app/media
     depends_on:
-      - core
-
-  celery:
-    build: core
-    depends_on:
-      - core
-      - rabbitmq
-    command: celery -A config worker --concurrency=4 --loglevel=info  -P gevent
-    env_file:
-      - .env
-    environment:
-      - POSTGRES_HOST=postgres_db
-      - REDIS_HOST=redis
-      - RABBITMQ_HOST=rabbitmq
-    restart: always
+      core:
+        condition: service_started
 
   redis:
     image: redis:alpine
@@ -63,8 +68,16 @@ services:
      ports:
        - "5672"
      restart: always
+     healthcheck:
+       test: [ "CMD-SHELL", "rabbitmqctl status" ]
+       interval: 10s
+       timeout: 5s
+       retries: 5
 
 volumes:
   postgres_data:
   static_volume:
   media_volume:
+
+  core_volume:
+  notification_service_volume:

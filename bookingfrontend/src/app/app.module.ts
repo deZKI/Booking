@@ -16,7 +16,6 @@ import {AuthInterceptor} from "./auth.interceptor";
 import {AuthGuard} from "./auth.guard";
 import {AuthService} from "./services/auth.service";
 import {FormsModule} from "@angular/forms";
-import { HotelDetailComponent } from './components/hotel/hotel-detail/hotel-detail.component';
 
 @NgModule({
   declarations: [
