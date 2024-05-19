@@ -35,8 +35,9 @@ services:
 
   frontend:
     build: bookingfrontend
-    ports:
-      - "4200:4200"
+    volumes:
+      - angular-build_volume
+    command: npm run build --prod
 
   postgres_db:
     image: postgres:16
@@ -53,8 +54,11 @@ services:
     volumes:
       - static_volume:/app/static
       - media_volume:/app/media
+      - angular-build_volume
     depends_on:
       core:
+        condition: service_started
+      frontend:
         condition: service_started
 
   redis:
@@ -81,3 +85,4 @@ volumes:
 
   core_volume:
   notification_service_volume:
+  angular-build_volume:
