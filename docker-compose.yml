@@ -36,7 +36,7 @@ services:
   frontend:
     build: bookingfrontend
     volumes:
-      - angular-build_volume
+      - angular-build_volume:/app/dist
     command: npm run build --prod
 
   postgres_db:
@@ -54,7 +54,7 @@ services:
     volumes:
       - static_volume:/app/static
       - media_volume:/app/media
-      - angular-build_volume
+      - angular-build_volume:/usr/share/nginx/html
     depends_on:
       core:
         condition: service_started
