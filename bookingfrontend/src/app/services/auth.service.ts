@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import {environment} from "../../environments/environment";
 import {AuthResponse} from "../shared/models/auth";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
   private accessTokenKey = 'access';
   private refreshTokenKey = 'refresh';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login/`, { email, password })
@@ -63,6 +64,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(this.accessTokenKey);
     localStorage.removeItem(this.refreshTokenKey);
+    this.router.navigate(['/'])
   }
 
   isAuthenticated(): boolean {

@@ -1,10 +1,13 @@
 <div class="nav-bar">
-  <div class="nav-bar__logo"><mat-icon svgIcon="lagoona-logo"></mat-icon></div>
+  <div class="nav-bar__logo"><mat-icon svgIcon="lagoona-logo" [routerLink]="'/'"></mat-icon></div>
   <div class="nav-bar-info">
-    <div class="nav-bar-info__number">+7 495 322-54-48</div>
+    <div class="nav-bar-info__number" href="tel:+74953225448">+7 495 322-54-48</div>
     <button class="button" mat-button [routerLink]="'user'">
       <mat-icon style="width: 24px; height: 24px" svgIcon="arrow"></mat-icon>
       <span>Личный кабинет</span>
+    </button>
+    <button class="button" mat-button *ngIf="authService.isAuthenticated()" (click)="logout()">
+      <span>Выход</span>
     </button>
 
   </div>
